@@ -24,7 +24,9 @@ namespace MvcCore
         public void ConfigureServices(IServiceCollection services)
         {
             string url = this.Configuration["urlapidepartamentos"];
+            string urldoc = this.Configuration["urlapidoctores"];
             services.AddTransient(x => new ServiceDepartamentos(url));
+            services.AddTransient(x => new ServiceDoctores(urldoc));
             services.AddControllersWithViews();
         }
 

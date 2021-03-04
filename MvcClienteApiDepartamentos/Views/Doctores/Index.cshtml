@@ -1,0 +1,59 @@
+﻿@model IEnumerable<NuGetDoctoresModels.Doctor>
+
+@{
+    ViewData["Title"] = "ListDepartamentos";
+}
+
+<h1>ListDepartamentos</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdDoctor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Especialidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hospital)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salario)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdDoctor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Especialidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hospital)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salario)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IdDoctor }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IdDoctor }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdDoctor })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
