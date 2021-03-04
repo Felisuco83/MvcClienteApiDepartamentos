@@ -1,0 +1,67 @@
+﻿<h1>Consumo Api Crud Departamentos</h1>
+
+@section scripts {
+    <script src="~/js/serviceapidepartamentos.js"></script>
+    <script>
+        $(document).ready(function () {
+        var urlapi = "https://apicruddepartamentostete.azurewebsites.net/"; 
+            $(document).ready(function () {
+            cargarDepartamentos();
+            $("#tabladepartamentos tbody").html(cargarDepartamentos());
+            $("#botoneliminar").click(function () {
+                var id = $("#cajanumero").val();
+                eliminarDepartamentoAsync(id, function () {
+                    cargarDepartamentos();
+                });
+            });
+            $("#botoninsertar").click(function () {
+                var id = parseInt($("#cajanumero").val());
+                var nombre = $("#cajanombre").val();
+                var loc = $("#cajalocalidad").val();
+                var json = convertirDeptJson(id, nombre, loc);
+                insertarDepartamentoAsync(json, function () {
+                    cargarDepartamentos();
+                });
+            });
+            $("#botonmodificar").click(function () {
+                var id = parseInt($("#cajanumero").val());
+                var nombre = $("#cajanombre").val();
+                var loc = $("#cajalocalidad").val();
+                var json = convertirDeptJson(id, nombre, loc);
+                modificarDepartamentoAsync(json, function () {
+                    cargarDepartamentos();
+                });
+            });
+        });
+        function cargarDepartamentos() {
+            getTablaDepartamentosAsync(function (data) {
+                $("#tabladepartamentos tbody").html(data);
+            });
+        }
+    });
+</script>
+}
+
+<form method="post">
+    <label>Id departamento:</label>
+    <input type="text" id="cajanumero" placeholder="Id departamento" class="form-control" />
+    <label> Nombre:</label>
+    <input type="text" id="cajanombre" placeholder="Nombre departamento" class="form-control" />
+    <label> Localidad:</label>
+    <input type="text" id="cajalocalidad" placeholder="Localidad" class="form-control" />
+    <button type="button" id="botoninsertar" class="btn btn-success">Insertar</button>
+    <button type="button" id="botonmodificar" class="btn btn-info">Modificar</button>
+    <button type="button" id="botoneliminar" class="btn btn-danger">Eliminar</button>
+</form>
+<table class="table table-bordered table-info" id="tabladepartamentos">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Localidad</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
